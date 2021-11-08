@@ -1,0 +1,23 @@
+{
+  "name": "ecommerce-with-docker",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p ${PORT:=3000}",
+    "build": "next build",
+    "start": "next start -p ${PORT:=3000}",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "mysql2": "^2.3.3-rc.0",
+    "next": "12.0.3",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "16.11.6",
+    "@types/react": "17.0.34",
+    "eslint": "7.32.0",
+    "eslint-config-next": "12.0.2",
+    "typescript": "4.4.4"
+  }
+}
