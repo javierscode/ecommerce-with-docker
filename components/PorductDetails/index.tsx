@@ -19,7 +19,7 @@ type ProductDetailsProps = {
 }
 
 const ProductDetails = ({ product }: ProductDetailsProps) => {
-    
+
   const { addProductToCart } = useContext(ShopContext)
   const toast = useToast()
 
@@ -101,6 +101,9 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
           textAlign="justify"
         >
           {product.description}
+        </Text>
+        <Text fontSize="6xl" fontWeight="bold" textAlign="right" marginTop={-10}>
+            {product.price}€
         </Text>
         <Button
           colorScheme="teal"
