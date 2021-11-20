@@ -12,6 +12,8 @@ import { useContext } from 'react'
 import { FiShoppingCart } from 'react-icons/fi'
 import ShopContext from '../../context/ShopContext'
 import Product from '../../intefaces/product'
+import NextLink from 'next/link'
+import ListOfTags from '../ListOfTags'
 
 function Card(props: Product) {
   const toast = useToast()
@@ -49,52 +51,47 @@ function Card(props: Product) {
       rounded="lg"
       shadow="lg"
     >
-      <Image src={imageUrl} alt={`Picture of ${name}`} roundedTop="lg" />
-      <Box p="6">
-        <Flex alignItems="baseline" gridGap={2}>
-          {categories.map((category) => {
-            return (
-              <Badge
-                variantcolor="teal"
-                variant="solid"
-                rounded="full"
-                px="2"
-                py="1"
-                key={category}
-              >
-                {category}
-              </Badge>
-            )
-          })}
-        </Flex>
-        <Flex mt="1" justifyContent="space-between" alignContent="center">
-          <Box
-            fontSize="lg"
-            fontWeight="semibold"
-            as="h4"
-            lineHeight="tight"
-            isTruncated
-          >
-            {name}
-          </Box>
-        </Flex>
-        <Flex justifyContent="space-between" alignItems="baseline">
-          {variantName && <Text>{variantName}</Text>}
-          <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')} marginLeft="auto">
-            {price.toFixed(2)}
-            <Box as="span" color={'gray.600'} fontSize="lg">
-              €
+      {' '}
+      <NextLink href="/product/[id]" as={`/product/${props.id}`}>
+        <a>
+        <Image src={imageUrl} alt={`Picture of ${name}`} roundedTop="lg" />
+        <Box p="6">
+          <ListOfTags tags={categories} />
+          <Flex mt="1" justifyContent="space-between" alignContent="center">
+            <Box
+              fontSize="lg"
+              fontWeight="semibold"
+              as="h4"
+              lineHeight="tight"
+              isTruncated
+            >
+              {name}
             </Box>
-          </Box>
-        </Flex>
-      </Box>
+          </Flex>
+          <Flex justifyContent="space-between" alignItems="baseline">
+            {variantName && <Text>{variantName}</Text>}
+            <Box
+              fontSize="2xl"
+              color={useColorModeValue('gray.800', 'white')}
+              marginLeft="auto"
+            >
+              {price.toFixed(2)}
+              <Box as="span" color={'gray.600'} fontSize="lg">
+                €
+              </Box>
+            </Box>
+          </Flex>
+        </Box>
+        </a>
+      </NextLink>
       <Button
         roundedTop="none"
         w="100%"
         rightIcon={<FiShoppingCart />}
         onClick={handleClick}
+        colorScheme="teal"
       >
-        Add to the Cart
+        Añadir al carrito
       </Button>
     </Box>
   )

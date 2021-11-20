@@ -25,7 +25,7 @@ export default function Nav() {
       px={4}
       position="sticky"
       top={0}
-      zIndex={1}
+      zIndex={4}
     >
       <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
         <NextLink href={'/'}>
