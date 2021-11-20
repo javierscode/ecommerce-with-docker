@@ -1,9 +1,9 @@
 import { Grid } from '@chakra-ui/layout'
-import { mockedProductsType } from '../../pages/api/get-products'
+import Product from '../../intefaces/product'
 import Card from '../Card'
 
 interface CardListProps {
-  products: mockedProductsType
+  products: Array<Product>
 }
 
 const CardList = ({ products }: CardListProps) => (
@@ -14,11 +14,13 @@ const CardList = ({ products }: CardListProps) => (
     {products.map((product, index) => (
       <Card
         key={index}
+        id={product.id}
+        description={product.description}
         categories={product.categories}
-        image_url={product.image_url}
+        imageUrl={product.imageUrl}
         name={product.name}
         price={product.price}
-        variant_name={product.variant_name || undefined}
+        variantName={product.variantName || undefined}
       />
     ))}
   </Grid>

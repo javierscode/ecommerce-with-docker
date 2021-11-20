@@ -3,7 +3,7 @@ DROP DATABASE ecommerce;
 CREATE TABLE PRODUCTS (
     id int NOT NULL AUTO_INCREMENT,
     name varchar(255) NOT NULL,
-    variant_name varchar(255),
+    variantName varchar(255),
     description varchar(255),
     image varchar(255),
     price FLOAT(6, 2),
