@@ -20,41 +20,45 @@ export default function Nav() {
   const { cart } = useContext(ShopContext)
 
   return (
-    <>
-      <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
-        <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-          <NextLink href={'/'}>
-            <a>Alternative Freshly Cosmetics</a>
-          </NextLink>
-          <Flex alignItems={'center'}>
-            <Stack direction={'row'} spacing={7}>
-              <Button onClick={toggleColorMode}>
-                {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+    <Box
+      bg={useColorModeValue('gray.100', 'gray.900')}
+      px={4}
+      position="sticky"
+      top={0}
+      zIndex={1}
+    >
+      <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
+        <NextLink href={'/'}>
+          <a>Alternative Freshly Cosmetics</a>
+        </NextLink>
+        <Flex alignItems={'center'}>
+          <Stack direction={'row'} spacing={7}>
+            <Button onClick={toggleColorMode}>
+              {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+            </Button>
+            <NextLink href={'/cart'} passHref>
+              <Button as="a">
+                <FiShoppingCart />
+                {cart.length > 0 && (
+                  <Badge
+                    size="md"
+                    borderRadius="full"
+                    paddingX={2}
+                    paddingY={1}
+                    position="absolute"
+                    bottom={-1}
+                    right="-1"
+                    backgroundColor="red.500"
+                    color="white"
+                  >
+                    {getTotalQuantity(cart)}
+                  </Badge>
+                )}
               </Button>
-              <NextLink href={'/cart'} passHref>
-                <Button as="a">
-                  <FiShoppingCart />
-                  {cart.length > 0 && (
-                    <Badge
-                      size="md"
-                      borderRadius="full"
-                      paddingX={2}
-                      paddingY={1}
-                      position="absolute"
-                      bottom={-1}
-                      right="-1"
-                      backgroundColor="red.500"
-                      color="white"
-                    >
-                      {getTotalQuantity(cart)}
-                    </Badge>
-                  )}
-                </Button>
-              </NextLink>
-            </Stack>
-          </Flex>
+            </NextLink>
+          </Stack>
         </Flex>
-      </Box>
-    </>
+      </Flex>
+    </Box>
   )
 }
