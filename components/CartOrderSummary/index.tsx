@@ -65,13 +65,15 @@ export const CartOrderSummary = () => {
           </Text>
         </Flex>
       </Stack>
-      <NextLink href="/checkout" passHref>
+      <NextLink href="/checkout" passHref >
         <Button
           as={'a'}
           colorScheme="blue"
           size="lg"
           fontSize="md"
           rightIcon={<FaArrowRight />}
+          disabled={cart.length === 0}
+          pointerEvents={cart.length === 0 ? 'none' : 'auto'}
         >
           Tramitar pedido
         </Button>
