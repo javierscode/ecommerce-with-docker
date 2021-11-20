@@ -1,27 +1,46 @@
 import {
   Flex,
-  Circle,
   Box,
   Image,
   Badge,
   useColorModeValue,
-  Icon,
-  chakra,
-  Tooltip,
+  useToast,
   Text,
+  Button,
 } from '@chakra-ui/react'
+import { useContext } from 'react'
 import { FiShoppingCart } from 'react-icons/fi'
+import ShopContext from '../../context/ShopContext'
+import Product from '../../intefaces/product'
 
+function Card(props: Product) {
+  const toast = useToast()
+  const { addProductToCart } = useContext(ShopContext)
 
-interface CardProps {
-    categories: string[]
-    name: string
-    variant_name?: string
-    image_url: string
-    price: number
-}
+  const { imageUrl, categories, name, variantName, price } = props
 
-function Card({categories, name, variant_name, image_url, price}: CardProps) {
+  const handleClick = () => {
+    try {
+      addProductToCart(props)
+      toast({
+        title: 'Producto añadido al carrito',
+        description: name,
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+        position: 'bottom-right',
+      })
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'No se ha podido añadir el producto al carrito',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: 'bottom-right',
+      })
+    }
+  }
   return (
     <Box
       bg={useColorModeValue('white', 'gray.800')}
@@ -30,17 +49,13 @@ function Card({categories, name, variant_name, image_url, price}: CardProps) {
       rounded="lg"
       shadow="lg"
     >
-      <Image
-        src={image_url}
-        alt={`Picture of ${name}`}
-        roundedTop="lg"
-      />
+      <Image src={imageUrl} alt={`Picture of ${name}`} roundedTop="lg" />
       <Box p="6">
         <Flex alignItems="baseline" gridGap={2}>
           {categories.map((category) => {
             return (
               <Badge
-                variantColor="teal"
+                variantcolor="teal"
                 variant="solid"
                 rounded="full"
                 px="2"
@@ -62,21 +77,10 @@ function Card({categories, name, variant_name, image_url, price}: CardProps) {
           >
             {name}
           </Box>
-          <Tooltip
-            label="Add to cart"
-            bg="white"
-            placement={'top'}
-            color={'gray.800'}
-            fontSize={'1.2em'}
-          >
-            <chakra.a href={'#'} display={'flex'}>
-              <Icon as={FiShoppingCart} h={7} w={7} alignSelf={'center'} />
-            </chakra.a>
-          </Tooltip>
         </Flex>
         <Flex justifyContent="space-between" alignItems="baseline">
-          {variant_name && <Text>{variant_name}</Text>}
-          <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
+          {variantName && <Text>{variantName}</Text>}
+          <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')} marginLeft="auto">
             {price.toFixed(2)}
             <Box as="span" color={'gray.600'} fontSize="lg">
               €
@@ -84,6 +88,14 @@ function Card({categories, name, variant_name, image_url, price}: CardProps) {
           </Box>
         </Flex>
       </Box>
+      <Button
+        roundedTop="none"
+        w="100%"
+        rightIcon={<FiShoppingCart />}
+        onClick={handleClick}
+      >
+        Add to the Cart
+      </Button>
     </Box>
   )
 }

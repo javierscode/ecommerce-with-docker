@@ -1,6 +1,7 @@
-import { mockedProductsType } from "../pages/api/get-products"
+import CartItem from '../intefaces/ cart'
+import Product from '../intefaces/product'
 
-export const getAllAvailableCategories = (products: mockedProductsType) => {
+export const getAllAvailableCategories = (products: Array<Product>) => {
   const categories: Array<string> = []
 
   products.forEach((product) => {
@@ -12,4 +13,12 @@ export const getAllAvailableCategories = (products: mockedProductsType) => {
   })
 
   return categories
+}
+
+export const getTotalQuantity = (cart: Array<CartItem>) => {
+  let total = 0
+  cart.forEach((item) => {
+    total += item.quantity
+  })
+  return total
 }
