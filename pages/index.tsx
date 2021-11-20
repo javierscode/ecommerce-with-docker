@@ -6,7 +6,6 @@ import React, { useState } from 'react'
 import CardList from '../components/CardList'
 import { getAllAvailableCategories } from '../helpers'
 import Product from '../intefaces/product'
-import { mockedProductsType } from './api/get-products'
 
 interface HomeProps {
   products: Array<Product>
@@ -55,8 +54,8 @@ const Home: NextPage<HomeProps> = ({ products }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const response = await fetch('http://localhost:3000/api/get-products')
-  const products: mockedProductsType = await response.json()
+  const response = await fetch('http://localhost:3000/api/products')
+  const products: Array<Product> = await response.json()
 
   return {
     props: { products },
