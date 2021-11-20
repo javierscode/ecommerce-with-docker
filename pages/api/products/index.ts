@@ -1,5 +1,5 @@
 import { NextApiHandler } from "next";
-import mockedProducts from "../../lib/products.json";
+import mockedProducts from "../../../lib/products.json";
 
 export type mockedProductsType = typeof mockedProducts;
 
