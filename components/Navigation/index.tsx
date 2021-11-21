@@ -28,7 +28,7 @@ export default function Nav() {
       zIndex={4}
     >
       <Flex bg="teal" p={1} justifyContent="center">
-        <Text fontSize="xs" fontWeight="bold" color="white" >{'Ecommerce clone for educational purposes'.toUpperCase()}</Text>
+        <Text fontSize="xs" fontWeight="bold" color="white" >{'Ecommerce for educational purposes'.toUpperCase()}</Text>
       </Flex>
       <Flex h={16} alignItems={'center'} justifyContent={'space-between'}       px={4}
 >

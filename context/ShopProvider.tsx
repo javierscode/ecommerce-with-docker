@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from 'react'
+import React, { useReducer, useEffect, useState } from 'react'
 
 import ShopContext from './ShopContext'
 import cartReducer from './CartReducer'
@@ -11,6 +11,7 @@ import {
   REMOVE_PRODUCT,
 } from './ShopActions'
 import CartItem from '../intefaces/ cart'
+import { shippingFormData } from '../components/ShippingForm'
 
 type ShopProviderProps = {
   children: React.ReactNode
@@ -18,6 +19,7 @@ type ShopProviderProps = {
 
 const ShopProvider = ({ children }: ShopProviderProps) => {
   const [cartState, dispatch] = useReducer(cartReducer, [])
+  const [cartInitiated, setCartInitiated] = useState(false)
 
   useEffect(() => {
     if (window.localStorage.getItem('cart')) {
@@ -31,6 +33,7 @@ const ShopProvider = ({ children }: ShopProviderProps) => {
           initCart: cart,
         },
       })
+      setCartInitiated(true)
     }
   }, [])
 
@@ -55,6 +58,14 @@ const ShopProvider = ({ children }: ShopProviderProps) => {
     dispatch({ type: CHANGE_QUANTITY, payload: { productId, quantity } })
   }
 
+  const sendOrder = async(data:shippingFormData) => {
+    console.log(data, cartState)
+  }
+
+  const clearCart = () => {
+    dispatch({ type: INIT_CART, payload: { initCart: [] } })
+  }
+
   return (
     <ShopContext.Provider
       value={{
@@ -62,6 +73,9 @@ const ShopProvider = ({ children }: ShopProviderProps) => {
         addProductToCart,
         removeProductFromCart,
         changeProductQuantityFromCart,
+        cartInitiated,
+        sendOrder,
+        clearCart
       }}
     >
       {children}
