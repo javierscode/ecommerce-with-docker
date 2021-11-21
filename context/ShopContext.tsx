@@ -9,7 +9,7 @@ const DEFAULT_STATE = {
   removeProductFromCart: (productId: string) => {},
   changeProductQuantityFromCart: (productId: string, quantity: number) => {},
   cartInitiated: false,
-  sendOrder: async(data: shippingFormData) => {},
+  sendOrder: async(data: shippingFormData):Promise<Response> => { return new Promise((resolve, reject) => { resolve(new Response()) }) },
   clearCart: () => {},
 }
 

@@ -10,8 +10,6 @@ type ProductPageProps = {
 }
 
 const ProductPage = ({ product, relatedProducts }: ProductPageProps) => {
-  console.log(product)
-  console.log(relatedProducts)
 
   return (
     <Container
