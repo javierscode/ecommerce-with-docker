@@ -4,7 +4,7 @@ services:
   mysql:
     image: mysql:8.0.27
     restart: always
-    command: --default-authentication-plugin=mysql_native_password
+    command: --default-authentication-plugin=mysql_native_password --init-file /docker-entrypoint-initdb.d/init.sql
     ports:
       - 3306:3306
     environment:
@@ -14,6 +14,7 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
       - mysql_data:/var/lib/mysql
+      - ./lib/INIT_DB.sql:/docker-entrypoint-initdb.d/init.sql
     cap_add:
       - SYS_NICE  # CAP_SYS_NICE
 
@@ -24,6 +25,8 @@ services:
       - 8080:80
     environment:
       - PMA_HOST=mysql
+      - PMA_USER=${MYSQL_USER}
+      - PMA_PASSWORD=${MYSQL_PASSWORD}
       - PMA_PORT=3306
       - PMA_ARBITRARY=1
     depends_on:

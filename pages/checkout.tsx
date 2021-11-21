@@ -32,8 +32,14 @@ const CheckoutPage = () => {
 
   const onSubmit = async (data: shippingFormData) => {
     try {
-      await sendOrder(data)
+      const response = await sendOrder(data)
+      console.log(response);
+      
+      if (!response.ok) {
+        throw new Error('Error sending order')
+      }
       onOpen()
+      
     }catch(e){
       toast({
           title: 'Error',

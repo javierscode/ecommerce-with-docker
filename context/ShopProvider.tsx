@@ -12,6 +12,7 @@ import {
 } from './ShopActions'
 import CartItem from '../intefaces/ cart'
 import { shippingFormData } from '../components/ShippingForm'
+import { createConnection } from '../lib/db'
 
 type ShopProviderProps = {
   children: React.ReactNode
@@ -59,7 +60,20 @@ const ShopProvider = ({ children }: ShopProviderProps) => {
   }
 
   const sendOrder = async(data:shippingFormData) => {
-    console.log(data, cartState)
+
+    return Promise.resolve(fetch('http://localhost:3000/api/orders/add',{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        customer: data,
+        cart: cartState.map(product => ({
+          productId: product.id,
+          quantity: product.quantity
+        }))
+    })
+    }))
   }
 
   const clearCart = () => {

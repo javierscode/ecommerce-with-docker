@@ -1,5 +1,5 @@
 export default interface Product {
-  id: string
+  id: number
   categories: string[]
   name: string
   variantName?: string
