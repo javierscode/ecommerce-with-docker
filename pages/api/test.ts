@@ -1,15 +1,13 @@
 import { NextApiHandler } from 'next'
 import { createConnection } from '../../lib/db'
 
+
 const handler: NextApiHandler = async (_, res) => {
+  const db = await createConnection()
 
-  const db = await createConnection();
-
-  const [rows, fields]  = await db.query('SELECT * FROM test');
-
-  res.json([rows, fields])
- 
-
+  db
+    ? res.status(200).json({ message: 'Connected to database' })
+    : res.status(500).json({ message: 'Error connecting to database' })
 }
 
 export default handler
