@@ -42,7 +42,13 @@ const getTaxes = (cart: Array<CartItem>, percentage: number) => {
   return Math.round(getTotalPrice(cart) * percentage * 100) / 100
 }
 
-export const CartOrderSummary = () => {
+type CartOrderSummaryProps = {
+  disableCheckout?: boolean
+}
+
+export const CartOrderSummary = ({
+  disableCheckout,
+}: CartOrderSummaryProps) => {
   const { cart } = useContext(ShopContext)
 
   const totalPrice = useMemo(() => getTotalPrice(cart), [cart])
@@ -65,7 +71,7 @@ export const CartOrderSummary = () => {
           </Text>
         </Flex>
       </Stack>
-      <NextLink href="/checkout" passHref >
+      {!disableCheckout && <NextLink href="/checkout" passHref>
         <Button
           as={'a'}
           colorScheme="blue"
@@ -77,7 +83,7 @@ export const CartOrderSummary = () => {
         >
           Tramitar pedido
         </Button>
-      </NextLink>
+      </NextLink>}
     </Stack>
   )
 }
