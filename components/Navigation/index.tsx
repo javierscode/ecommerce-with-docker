@@ -7,10 +7,11 @@ import {
   Stack,
   useColorMode,
   Badge,
-  Text
+  Text,
 } from '@chakra-ui/react'
 import { MoonIcon, SunIcon } from '@chakra-ui/icons'
 import { FiShoppingCart } from 'react-icons/fi'
+import { RiAdminFill } from 'react-icons/ri'
 import NextLink from 'next/link'
 import ShopContext from '../../context/ShopContext'
 import { getTotalQuantity } from '../../helpers'
@@ -28,10 +29,23 @@ export default function Nav() {
       zIndex={4}
     >
       <Flex bg="teal" p={1} justifyContent="center">
-        <Text fontSize="xs" fontWeight="bold" color="white" >{'Ecommerce for educational purposes'.toUpperCase()}</Text>
+        <Text fontSize="xs" fontWeight="bold" color="white">
+          {'Ecommerce for educational purposes'.toUpperCase()}
+        </Text>
+        <Box position="absolute" right={7}>
+          <NextLink href={'/admin'}>
+            <a>
+              <RiAdminFill />
+            </a>
+          </NextLink>
+        </Box>
       </Flex>
-      <Flex h={16} alignItems={'center'} justifyContent={'space-between'}       px={4}
->
+      <Flex
+        h={16}
+        alignItems={'center'}
+        justifyContent={'space-between'}
+        px={4}
+      >
         <NextLink href={'/'}>
           <a>Alternative Freshly Cosmetics</a>
         </NextLink>

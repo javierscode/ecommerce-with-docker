@@ -21,6 +21,7 @@ type ShopProviderProps = {
 const ShopProvider = ({ children }: ShopProviderProps) => {
   const [cartState, dispatch] = useReducer(cartReducer, [])
   const [cartInitiated, setCartInitiated] = useState(false)
+  const [authorized, setAuthorized] = useState(false)
 
   useEffect(() => {
     if (window.localStorage.getItem('cart')) {
@@ -80,6 +81,27 @@ const ShopProvider = ({ children }: ShopProviderProps) => {
     dispatch({ type: INIT_CART, payload: { initCart: [] } })
   }
 
+  const login = async (user:string, password:string) => {
+
+    const response = await fetch('http://localhost:3000/api/users/login',{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user,
+        password
+    })
+    })
+
+    if (response.ok) {
+      setAuthorized(true)
+    }
+
+    return response
+    
+  }
+
   return (
     <ShopContext.Provider
       value={{
@@ -89,7 +111,9 @@ const ShopProvider = ({ children }: ShopProviderProps) => {
         changeProductQuantityFromCart,
         cartInitiated,
         sendOrder,
-        clearCart
+        clearCart,
+        login,
+        authorized
       }}
     >
       {children}

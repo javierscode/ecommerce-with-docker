@@ -52,6 +52,16 @@ CREATE TABLE Orders_Carts (
     PRIMARY KEY (order_id, cart_id)
 );
 
+
+DROP TABLE IF EXISTS Users;
+CREATE TABLE Users (
+    username varchar(255) NOT NULL,
+    password varchar(255) NOT NULL,
+    PRIMARY KEY (username)
+);
+
+INSERT INTO Users (username, password) VALUES ('admin', 'admin');
+
 INSERT INTO Categories (name)
 VALUES ('Facial'),
     ('Corporal'),
