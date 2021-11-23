@@ -11,6 +11,8 @@ const DEFAULT_STATE = {
   cartInitiated: false,
   sendOrder: async(data: shippingFormData):Promise<Response> => { return new Promise((resolve, reject) => { resolve(new Response()) }) },
   clearCart: () => {},
+  authorized: false,
+  login: (user:string, password:string) :Promise<Response> => { return new Promise((resolve, reject) => { resolve(new Response()) }) },
 }
 
 const ShopContext = React.createContext(DEFAULT_STATE)
