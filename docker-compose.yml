@@ -42,10 +42,8 @@ services:
       - ./:/app
       - /app/node_modules
       - /app/.next
-    # env_file:
-    #   - .env
     depends_on:
       - phpmyadmin
-
+      
 volumes:
   mysql_data:
