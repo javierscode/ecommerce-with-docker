@@ -1,6 +1,15 @@
 USE ecommerce;
 
+DROP TABLE IF EXISTS Products_Categories;
 DROP TABLE IF EXISTS Products;
+DROP TABLE IF EXISTS Categories;
+
+DROP TABLE IF EXISTS Orders_Carts;
+DROP TABLE IF EXISTS Orders;
+DROP TABLE IF EXISTS Carts;
+
+DROP TABLE IF EXISTS Users;
+
 CREATE TABLE Products (
     id int NOT NULL AUTO_INCREMENT,
     name varchar(255) NOT NULL,
@@ -11,21 +20,20 @@ CREATE TABLE Products (
     PRIMARY KEY (ID)
 );
 
-DROP TABLE IF EXISTS Categories;
 CREATE TABLE Categories (
     id int NOT NULL AUTO_INCREMENT,
     name varchar(255) NOT NULL,
     PRIMARY KEY (id)
 );
 
-DROP TABLE IF EXISTS Products_Categories;
 CREATE TABLE Products_Categories (
     product_id int NOT NULL,
     category_id int NOT NULL,
-    PRIMARY KEY (product_id, category_id)
+    PRIMARY KEY (product_id, category_id),
+    FOREIGN KEY (product_id) REFERENCES Products(id),
+    FOREIGN KEY (category_id) REFERENCES Categories(id)
 );
 
-DROP TABLE IF EXISTS Orders;
 CREATE TABLE Orders (
     id int NOT NULL AUTO_INCREMENT,
     date_created DATETIME,
@@ -37,23 +45,23 @@ CREATE TABLE Orders (
     PRIMARY KEY (id)
 );
 
-DROP TABLE IF EXISTS Carts;
 CREATE TABLE Carts (
     id int NOT NULL AUTO_INCREMENT,
     product_id int NOT NULL,
     quantity int NOT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    FOREIGN KEY (product_id) REFERENCES Products(id)
 );
 
-DROP TABLE IF EXISTS Orders_Carts;
 CREATE TABLE Orders_Carts (
     order_id int NOT NULL,
     cart_id int NOT NULL,
-    PRIMARY KEY (order_id, cart_id)
+    PRIMARY KEY (order_id, cart_id),
+    FOREIGN KEY (order_id) REFERENCES Orders(id),
+    FOREIGN KEY (cart_id) REFERENCES Carts(id)
 );
 
 
-DROP TABLE IF EXISTS Users;
 CREATE TABLE Users (
     username varchar(255) NOT NULL,
     password varchar(255) NOT NULL,
@@ -637,6 +645,7 @@ VALUES (
         "16.2"
     );
 
+
 INSERT INTO Products_Categories (product_id, category_id)
 VALUES ("1", "1"),
     ("2", "1"),
@@ -723,28 +732,5 @@ VALUES ("1", "1"),
     ("79", "1"),
     ("80", "2"),
     ("80", "1"),
-    ("80", "5"),
-    ("81", "2"),
-    ("82", "1"),
-    ("84", "1"),
-    ("84", "5"),
-    ("85", "1"),
-    ("86", "1"),
-    ("86", "5"),
-    ("87", "1"),
-    ("87", "5"),
-    ("88", "5"),
-    ("92", "5"),
-    ("93", "5"),
-    ("95", "5"),
-    ("99", "2"),
-    ("99", "5"),
-    ("100", "5"),
-    ("101", "1"),
-    ("101", "5"),
-    ("102", "5"),
-    ("103", "5"),
-    ("104", "5"),
-    ("105", "5"),
-    ("106", "5");
+    ("80", "5");
   

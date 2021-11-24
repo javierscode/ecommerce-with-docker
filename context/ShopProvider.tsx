@@ -142,7 +142,7 @@ const ShopProvider = ({ children }: ShopProviderProps) => {
         })
       } else {
         Orders.push({
-          id: order.id,
+          id: order.order_id,
           date_created: order.date_created,
           customer_name: order.customer_name,
           customer_surname: order.customer_surname,

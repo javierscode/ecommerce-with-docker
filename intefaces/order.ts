@@ -1,13 +1,13 @@
 import Product from "./product";
 
 export interface OrderByDB {
-    id: number;
+    id: string;
     date_created: string;
     customer_name: string;
     customer_surname: string;
     customer_postal_code: string;
     customer_city: string;
-    order_id: number;
+    order_id: string;
     cart_id: number;
     product_id: number;
     quantity: number;
@@ -19,7 +19,7 @@ export interface OrderByDB {
 }
 
 export interface Order {
-    id: number;
+    id: string;
     date_created: string;
     customer_name: string;
     customer_surname: string;

@@ -18,6 +18,9 @@ interface CartItemProps extends CartItem {
 }
 
 const QuantitySelect = (props: SelectProps) => {
+  const { value}= props
+
+  const allValues = Array(value).fill(0)
   return (
     <Select
       maxW="64px"
@@ -25,10 +28,11 @@ const QuantitySelect = (props: SelectProps) => {
       focusBorderColor={useColorModeValue('blue.500', 'blue.200')}
       {...props}
     >
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
+      {allValues.map((_, index) => (
+        <option key={index} value={index + 1}>
+          {index + 1}
+        </option>
+      ))}
     </Select>
   )
 }

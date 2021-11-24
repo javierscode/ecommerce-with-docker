@@ -3,7 +3,7 @@ import Product from '../../../intefaces/product'
 import { createConnection } from '../../../lib/db'
 
 type productsFromDb = {
-  id: number
+  id: string
   name: string
   description: string
   image_url: string
